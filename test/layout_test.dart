@@ -7,7 +7,7 @@ void main() {
     await tester.pumpWidget(MaterialApp(
         home: Swiper(
             index: 0,
-            layout: SwiperLayout.STACK,
+            layout: SwiperLayout.stack,
             itemWidth: 300.0,
             itemHeight: 200.0,
             itemBuilder: (context, index) {
@@ -25,7 +25,7 @@ void main() {
     await tester.pumpWidget(MaterialApp(
         home: Swiper(
             index: 0,
-            layout: SwiperLayout.TINDER,
+            layout: SwiperLayout.tinder,
             itemWidth: 300.0,
             itemHeight: 200.0,
             itemBuilder: (context, index) {
@@ -43,7 +43,7 @@ void main() {
     await tester.pumpWidget(MaterialApp(
         home: Swiper(
             index: 0,
-            layout: SwiperLayout.DEFAULT,
+            layout: SwiperLayout.standard,
             viewportFraction: 0.8,
             scale: 0.9,
             itemBuilder: (context, index) {
@@ -65,7 +65,7 @@ void main() {
     await tester.pumpWidget(MaterialApp(
         home: Swiper(
             index: 0,
-            layout: SwiperLayout.CUSTOM,
+            layout: SwiperLayout.custom,
             itemWidth: 300.0,
             itemHeight: 200.0,
             customLayoutOption: customLayoutOption,

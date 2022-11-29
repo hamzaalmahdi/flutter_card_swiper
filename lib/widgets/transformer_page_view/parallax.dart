@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_card_swiper/widgets/transformer_page_view/transformer_page_view.dart';
 
-typedef void PaintCallback(Canvas canvas, Size siz);
+typedef PaintCallback = void Function(Canvas canvas, Size siz);
 
 class ColorPainter extends CustomPainter {
   final Paint _paint;
@@ -107,8 +107,8 @@ class ParallaxContainer extends StatelessWidget {
   ParallaxContainer(
       {required this.child,
       required this.position,
-      this.translationFactor: 100.0,
-      this.opacityFactor: 1.0});
+      this.translationFactor = 100.0,
+      this.opacityFactor = 1.0});
 
   @override
   Widget build(BuildContext context) {
@@ -127,7 +127,7 @@ class ParallaxImage extends StatelessWidget {
   final double imageFactor;
 
   ParallaxImage.asset(String name,
-      {required double position, this.imageFactor: 0.3})
+      {required double position, this.imageFactor = 0.3})
       : image = Image.asset(name,
             fit: BoxFit.cover,
             alignment: FractionalOffset(

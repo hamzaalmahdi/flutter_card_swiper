@@ -28,11 +28,5 @@ flutter:
 
 
   assets:
-    - images/bg0.jpeg
-    - images/bg1.jpeg
-    - images/bg2.jpeg
-    - images/bg.jpeg
-    - images/1.png
-    - images/2.png
-    - images/3.png
+    - assets/images/
 

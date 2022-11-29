@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:flutter_card_swiper/widgets/flutter_page_indicator/flutter_page_indicator.dart';
-import 'src/example_custom.dart';
-import 'src/config.dart';
-import 'src/example_swiper_in_scroll_view.dart';
 
-import 'package:flutter/cupertino.dart';
+import 'src/config.dart';
+import 'src/example_custom.dart';
+import 'src/example_swiper_in_scroll_view.dart';
 
 void main() => runApp(MyApp());
 
@@ -26,8 +25,7 @@ class MyApp extends StatelessWidget {
         '/example03': (BuildContext context) => ExampleFraction(),
         '/example04': (BuildContext context) => ExampleCustomPagination(),
         '/example05': (BuildContext context) => ExamplePhone(),
-        '/example06': (BuildContext context) => ScaffoldWidget(
-            child: ExampleSwiperInScrollView(), title: 'ScrollView'),
+        '/example06': (BuildContext context) => ScaffoldWidget(child: ExampleSwiperInScrollView(), title: 'ScrollView'),
         '/example07': (BuildContext context) => ScaffoldWidget(
               child: ExampleCustom(),
               title: 'Custom All',
@@ -55,8 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
         })).toList();
   }
 
-  Widget buildListTile(
-      BuildContext context, String title, String subtitle, String url) {
+  Widget buildListTile(BuildContext context, String title, String subtitle, String url) {
     return ListTile(
       onTap: () {
         Navigator.of(context).pushNamed(url);
@@ -96,11 +93,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-const List<String> titles = [
-  'Flutter Swiper is awosome',
-  'Really nice',
-  'Yeap'
-];
+const List<String> titles = ['Flutter Swiper is awosome', 'Really nice', 'Yeap'];
 
 class ExampleHorizontal extends StatelessWidget {
   @override
@@ -122,7 +115,7 @@ class ExampleHorizontal extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           pagination: SwiperPagination(alignment: Alignment.centerRight),
           control: SwiperControl(),
-          indicatorLayout: PageIndicatorLayout.COLOR,
+          indicatorLayout: PageIndicatorLayout.color,
         ));
   }
 }
@@ -184,9 +177,7 @@ class ExampleFraction extends StatelessWidget {
               autoplay: true,
               itemCount: images.length,
               scrollDirection: Axis.vertical,
-              pagination: SwiperPagination(
-                  alignment: Alignment.centerRight,
-                  builder: SwiperPagination.fraction),
+              pagination: SwiperPagination(alignment: Alignment.centerRight, builder: SwiperPagination.fraction),
             ))
           ],
         ));
@@ -215,8 +206,7 @@ class ExampleCustomPagination extends StatelessWidget {
                 itemCount: images.length,
                 pagination: SwiperPagination(
                     margin: EdgeInsets.all(0.0),
-                    builder: SwiperCustomPagination(builder:
-                        (BuildContext context, SwiperPluginConfig config) {
+                    builder: SwiperCustomPagination(builder: (BuildContext context, SwiperPluginConfig config) {
                       return ConstrainedBox(
                         child: Container(
                             color: Colors.white,
@@ -243,8 +233,7 @@ class ExampleCustomPagination extends StatelessWidget {
                 itemCount: images.length,
                 pagination: SwiperPagination(
                     margin: EdgeInsets.all(0.0),
-                    builder: SwiperCustomPagination(builder:
-                        (BuildContext context, SwiperPluginConfig config) {
+                    builder: SwiperCustomPagination(builder: (BuildContext context, SwiperPluginConfig config) {
                       return ConstrainedBox(
                         child: Row(
                           children: <Widget>[
@@ -255,12 +244,7 @@ class ExampleCustomPagination extends StatelessWidget {
                             Expanded(
                               child: Align(
                                 alignment: Alignment.centerRight,
-                                child: DotSwiperPaginationBuilder(
-                                        color: Colors.black12,
-                                        activeColor: Colors.black,
-                                        size: 10.0,
-                                        activeSize: 20.0)
-                                    .build(context, config),
+                                child: DotSwiperPaginationBuilder(color: Colors.black12, activeColor: Colors.black, size: 10.0, activeSize: 20.0).build(context, config),
                               ),
                             )
                           ],
@@ -288,30 +272,24 @@ class ExamplePhone extends StatelessWidget {
           ConstrainedBox(
             constraints: BoxConstraints.expand(),
             child: Image.asset(
-              'images/bg.jpeg',
+              'assets/images/img.png',
               fit: BoxFit.fill,
             ),
           ),
           Swiper.children(
             autoplay: false,
-            pagination: SwiperPagination(
-                margin: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 30.0),
-                builder: DotSwiperPaginationBuilder(
-                    color: Colors.white30,
-                    activeColor: Colors.white,
-                    size: 20.0,
-                    activeSize: 20.0)),
+            pagination: SwiperPagination(margin: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 30.0), builder: DotSwiperPaginationBuilder(color: Colors.white30, activeColor: Colors.white, size: 20.0, activeSize: 20.0)),
             index: 0,
             children: <Widget>[
               Image.asset(
-                'images/1.png',
+                'assets/images/1.png',
                 fit: BoxFit.contain,
               ),
               Image.asset(
-                'images/2.png',
+                'assets/images/2.png',
                 fit: BoxFit.contain,
               ),
-              Image.asset('images/3.png', fit: BoxFit.contain)
+              Image.asset('assets/images/3.png', fit: BoxFit.contain)
             ],
           )
         ],

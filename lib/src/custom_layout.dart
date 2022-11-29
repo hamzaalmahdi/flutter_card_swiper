@@ -29,7 +29,7 @@ abstract class _CustomLayoutStateBase<T extends _SubSwiper> extends State<T>
 
   @override
   void didChangeDependencies() {
-    WidgetsBinding.instance!.addPostFrameCallback(_getSize);
+    WidgetsBinding.instance.addPostFrameCallback(_getSize);
     super.didChangeDependencies();
   }
 
@@ -173,21 +173,21 @@ abstract class _CustomLayoutStateBase<T extends _SubSwiper> extends State<T>
 
   void _onController() {
     switch (widget.controller!.event) {
-      case IndexController.PREVIOUS:
+      case IndexController.previousValue:
         final int prevIndex = _prevIndex();
         if (prevIndex == _currentIndex) return;
         _move(1.0, nextIndex: prevIndex);
         break;
-      case IndexController.NEXT:
+      case IndexController.nextValue:
         final int nextIndex = _nextIndex();
         if (nextIndex == _currentIndex) return;
         _move(0.0, nextIndex: nextIndex);
         break;
-      case IndexController.MOVE:
+      case IndexController.moveValue:
         throw Exception(
             'Custom layout does not support SwiperControllerEvent.MOVE_INDEX yet!');
-      case SwiperController.STOP_AUTOPLAY:
-      case SwiperController.START_AUTOPLAY:
+      case SwiperController.stopAutoPlay:
+      case SwiperController.startAutoPlay:
         break;
     }
   }
@@ -294,9 +294,10 @@ class ScaleTransformBuilder extends TransformBuilder<double> {
   final Alignment alignment;
 
   ScaleTransformBuilder(
-      {List<double>? values, this.alignment: Alignment.center})
+      {List<double>? values, this.alignment = Alignment.center})
       : super(values: values);
 
+  @override
   Widget build(int i, double animationValue, Widget widget) {
     final double s = _getValue(values!, animationValue, i)!;
     return Transform.scale(scale: s, child: widget);
@@ -306,6 +307,7 @@ class ScaleTransformBuilder extends TransformBuilder<double> {
 class OpacityTransformBuilder extends TransformBuilder<double> {
   OpacityTransformBuilder({List<double>? values}) : super(values: values);
 
+  @override
   Widget build(int i, double animationValue, Widget widget) {
     final double v = _getValue(values!, animationValue, i)!;
     return Opacity(
@@ -318,6 +320,7 @@ class OpacityTransformBuilder extends TransformBuilder<double> {
 class RotateTransformBuilder extends TransformBuilder<double> {
   RotateTransformBuilder({List<double>? values}) : super(values: values);
 
+  @override
   Widget build(int i, double animationValue, Widget widget) {
     final double v = _getValue(values!, animationValue, i)!;
     return Transform.rotate(

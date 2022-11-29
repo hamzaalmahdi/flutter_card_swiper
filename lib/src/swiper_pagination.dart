@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_card_swiper/src/swiper.dart';
 import 'package:flutter_card_swiper/src/swiper_plugin.dart';
 import 'package:flutter_card_swiper/widgets/flutter_page_indicator/flutter_page_indicator.dart';
@@ -21,10 +20,10 @@ class FractionPaginationBuilder extends SwiperPlugin {
 
   const FractionPaginationBuilder(
       {this.color,
-      this.fontSize: 20.0,
+      this.fontSize = 20.0,
       this.key,
       this.activeColor,
-      this.activeFontSize: 35.0});
+      this.activeFontSize = 35.0});
 
   @override
   Widget build(BuildContext context, SwiperPluginConfig? config) {
@@ -92,9 +91,9 @@ class RectSwiperPaginationBuilder extends SwiperPlugin {
       {this.activeColor,
       this.color,
       this.key,
-      this.size: const Size(10.0, 2.0),
-      this.activeSize: const Size(10.0, 2.0),
-      this.space: 3.0});
+      this.size = const Size(10.0, 2.0),
+      this.activeSize = const Size(10.0, 2.0),
+      this.space = 3.0});
 
   @override
   Widget build(BuildContext context, SwiperPluginConfig? config) {
@@ -115,7 +114,7 @@ class RectSwiperPaginationBuilder extends SwiperPlugin {
 
     for (int i = 0; i < itemCount; ++i) {
       final bool active = i == activeIndex;
-      final Size size = active ? this.activeSize : this.size;
+      final Size size = active ? activeSize : this.size;
       list.add(SizedBox(
         width: size.width,
         height: size.height,
@@ -165,9 +164,9 @@ class DotSwiperPaginationBuilder extends SwiperPlugin {
       {this.activeColor,
       this.color,
       this.key,
-      this.size: 10.0,
-      this.activeSize: 10.0,
-      this.space: 3.0});
+      this.size = 10.0,
+      this.activeSize = 10.0,
+      this.space = 3.0});
 
   @override
   Widget build(BuildContext context, SwiperPluginConfig? config) {
@@ -185,8 +184,8 @@ class DotSwiperPaginationBuilder extends SwiperPlugin {
       color = this.color ?? themeData.scaffoldBackgroundColor;
     }
 
-    if (config.indicatorLayout != PageIndicatorLayout.NONE &&
-        config.layout == SwiperLayout.DEFAULT) {
+    if (config.indicatorLayout != PageIndicatorLayout.none &&
+        config.layout == SwiperLayout.standard) {
       return PageIndicator(
         count: config.itemCount,
         controller: config.pageController,
@@ -234,7 +233,7 @@ class DotSwiperPaginationBuilder extends SwiperPlugin {
   }
 }
 
-typedef Widget SwiperPaginationBuilder(
+typedef SwiperPaginationBuilder = Widget Function(
     BuildContext context, SwiperPluginConfig? config);
 
 class SwiperCustomPagination extends SwiperPlugin {
@@ -272,9 +271,10 @@ class SwiperPagination extends SwiperPlugin {
   const SwiperPagination(
       {this.alignment,
       this.key,
-      this.margin: const EdgeInsets.all(10.0),
-      this.builder: SwiperPagination.dots});
+      this.margin = const EdgeInsets.all(10.0),
+      this.builder = SwiperPagination.dots});
 
+  @override
   Widget build(BuildContext context, SwiperPluginConfig? config) {
     final Alignment alignment = this.alignment ??
         (config!.scrollDirection == Axis.horizontal
@@ -282,7 +282,7 @@ class SwiperPagination extends SwiperPlugin {
             : Alignment.centerRight);
     Widget child = Container(
       margin: margin,
-      child: this.builder.build(context, config),
+      child: builder.build(context, config),
     );
     if (!config!.outer!) {
       child = Align(

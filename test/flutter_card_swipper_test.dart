@@ -136,7 +136,7 @@ void main() {
 
   testWidgets('Swiper fraction', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    SwiperController controller = SwiperController();
+    final SwiperController controller = SwiperController();
     await tester.pumpWidget(MaterialApp(
         home: Swiper(
       index: 0,
@@ -154,7 +154,7 @@ void main() {
 
   testWidgets('Zero itemCount', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    SwiperController controller = SwiperController();
+    final SwiperController controller = SwiperController();
     await tester.pumpWidget(MaterialApp(
         home: Swiper(
       index: 0,

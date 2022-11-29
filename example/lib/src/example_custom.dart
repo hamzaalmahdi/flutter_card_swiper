@@ -73,7 +73,7 @@ class _ExampleCustomState extends State<ExampleCustom> {
     _curve = Curves.ease;
     _scale = 0.8;
     _controller = SwiperController();
-    _layout = SwiperLayout.TINDER;
+    _layout = SwiperLayout.tinder;
     _radius = 10.0;
     _padding = 0.0;
     _loop = true;
@@ -124,7 +124,7 @@ class _ExampleCustomState extends State<ExampleCustom> {
       itemBuilder: _buildItem,
       itemCount: _itemCount,
       scrollDirection: _scrollDirection,
-      indicatorLayout: PageIndicatorLayout.COLOR,
+      indicatorLayout: PageIndicatorLayout.color,
       autoplayDisableOnInteraction: _autoplayDisableOnInteraction,
       pagination: SwiperPagination(
           builder: const DotSwiperPaginationBuilder(
@@ -182,10 +182,10 @@ class _ExampleCustomState extends State<ExampleCustom> {
                   placeholder: 'Select layout ',
                   value: _layout,
                   values: [
-                    SwiperLayout.DEFAULT,
-                    SwiperLayout.STACK,
-                    SwiperLayout.TINDER,
-                    SwiperLayout.CUSTOM
+                    SwiperLayout.standard,
+                    SwiperLayout.stack,
+                    SwiperLayout.tinder,
+                    SwiperLayout.custom
                   ],
                   valueChanged: (value) {
                     _layout = value;

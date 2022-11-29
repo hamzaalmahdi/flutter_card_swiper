@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_card_swiper/src/swiper_controller.dart';
 import 'package:flutter_card_swiper/src/swiper_pagination.dart';
 import 'package:flutter_card_swiper/src/swiper_plugin.dart';
@@ -12,9 +11,10 @@ import 'package:flutter_card_swiper/widgets/transformer_page_view/transformer_pa
 
 part 'custom_layout.dart';
 
-typedef void SwiperOnTap(int index);
+typedef SwiperOnTap = void Function(int index);
 
-typedef Widget SwiperDataBuilder(BuildContext context, dynamic data, int index);
+typedef SwiperDataBuilder = Widget Function(
+    BuildContext context, dynamic data, int index);
 
 /// default auto play delay
 const int kDefaultAutoplayDelayMs = 3000;
@@ -25,16 +25,16 @@ const int kDefaultAutoplayTransactionDuration = 300;
 const int kMaxValue = 2000000000;
 const int kMiddleValue = 1000000000;
 
-enum SwiperLayout { DEFAULT, STACK, TINDER, CUSTOM }
+enum SwiperLayout { standard, stack, tinder, custom }
 
 class Swiper extends StatefulWidget {
   /// If set true , the pagination will display 'outer' of the 'content' container.
   final bool outer;
 
-  /// Inner item height, this property is valid if layout=STACK or layout=TINDER or LAYOUT=CUSTOM,
+  /// Inner item height, this property is valid if layout=stack or layout=tinder or LAYOUT=custom,
   final double? itemHeight;
 
-  /// Inner item width, this property is valid if layout=STACK or layout=TINDER or LAYOUT=CUSTOM,
+  /// Inner item width, this property is valid if layout=stack or layout=tinder or LAYOUT=custom,
   final double? itemWidth;
 
   // height of the inside container,this property is valid when outer=true,otherwise the inside container size is controlled by parent widget
@@ -104,7 +104,7 @@ class Swiper extends StatefulWidget {
   /// Build in layouts
   final SwiperLayout layout;
 
-  /// this value is valid when layout == SwiperLayout.CUSTOM
+  /// this value is valid when layout == SwiperLayout.custom
   final CustomLayoutOption? customLayoutOption;
 
   // This value is valid when viewportFraction is set and < 1.0
@@ -117,23 +117,23 @@ class Swiper extends StatefulWidget {
 
   Swiper({
     this.itemBuilder,
-    this.indicatorLayout: PageIndicatorLayout.NONE,
+    this.indicatorLayout = PageIndicatorLayout.none,
 
     ///
     this.transformer,
     required this.itemCount,
-    this.autoplay: false,
-    this.layout: SwiperLayout.DEFAULT,
-    this.autoplayDelay: kDefaultAutoplayDelayMs,
-    this.autoplayDisableOnInteraction: true,
-    this.duration: kDefaultAutoplayTransactionDuration,
+    this.autoplay = false,
+    this.layout = SwiperLayout.standard,
+    this.autoplayDelay = kDefaultAutoplayDelayMs,
+    this.autoplayDisableOnInteraction = true,
+    this.duration = kDefaultAutoplayTransactionDuration,
     this.onIndexChanged,
     this.index = 0,
     this.onTap,
     this.control,
-    this.loop: true,
-    this.curve: Curves.ease,
-    this.scrollDirection: Axis.horizontal,
+    this.loop = true,
+    this.curve = Curves.ease,
+    this.scrollDirection = Axis.horizontal,
     this.pagination,
     this.plugins,
     this.physics,
@@ -144,10 +144,10 @@ class Swiper extends StatefulWidget {
     /// since v1.0.0
     this.containerHeight,
     this.containerWidth,
-    this.viewportFraction: 1.0,
+    this.viewportFraction = 1.0,
     this.itemHeight,
     this.itemWidth,
-    this.outer: false,
+    this.outer = false,
     this.scale,
     this.fade,
   })  : assert(itemBuilder != null || transformer != null,
@@ -155,27 +155,27 @@ class Swiper extends StatefulWidget {
         assert(
             !loop ||
                 ((loop &&
-                        layout == SwiperLayout.DEFAULT &&
-                        (indicatorLayout == PageIndicatorLayout.SCALE ||
-                            indicatorLayout == PageIndicatorLayout.COLOR ||
-                            indicatorLayout == PageIndicatorLayout.NONE)) ||
-                    (loop && layout != SwiperLayout.DEFAULT)),
-            'Only support `PageIndicatorLayout.SCALE` and `PageIndicatorLayout.COLOR`when layout==SwiperLayout.DEFAULT in loop mode'),
+                        layout == SwiperLayout.standard &&
+                        (indicatorLayout == PageIndicatorLayout.scale ||
+                            indicatorLayout == PageIndicatorLayout.color ||
+                            indicatorLayout == PageIndicatorLayout.none)) ||
+                    (loop && layout != SwiperLayout.standard)),
+            'Only support `PageIndicatorLayout.SCALE` and `PageIndicatorLayout.COLOR`when layout==SwiperLayout.standard in loop mode'),
         super(key: key);
 
   factory Swiper.children({
     required List<Widget> children,
-    bool autoplay: false,
+    bool autoplay = false,
     PageTransformer? transformer,
-    int autoplayDelay: kDefaultAutoplayDelayMs,
-    bool autoplayDisableOnInteraction: true,
-    int duration: kDefaultAutoplayTransactionDuration,
+    int autoplayDelay = kDefaultAutoplayDelayMs,
+    bool autoplayDisableOnInteraction = true,
+    int duration = kDefaultAutoplayTransactionDuration,
     ValueChanged<int>? onIndexChanged,
     int index = 0,
     SwiperOnTap? onTap,
-    bool loop: true,
-    Curve curve: Curves.ease,
-    Axis scrollDirection: Axis.horizontal,
+    bool loop = true,
+    Curve curve = Curves.ease,
+    Axis scrollDirection = Axis.horizontal,
     SwiperPlugin? pagination,
     SwiperPlugin? control,
     List<SwiperPlugin>? plugins,
@@ -185,11 +185,11 @@ class Swiper extends StatefulWidget {
     ScrollPhysics? physics,
     double? containerHeight,
     double? containerWidth,
-    double viewportFraction: 1.0,
+    double viewportFraction = 1.0,
     double? itemHeight,
     double? itemWidth,
-    bool outer: false,
-    double scale: 1.0,
+    bool outer = false,
+    double scale = 1.0,
   }) {
     return Swiper(
         transformer: transformer,
@@ -228,16 +228,16 @@ class Swiper extends StatefulWidget {
     required List list,
     CustomLayoutOption? customLayoutOption,
     SwiperDataBuilder? builder,
-    bool autoplay: false,
-    int autoplayDelay: kDefaultAutoplayDelayMs,
-    bool autoplayDisableOnInteraction: true,
-    int duration: kDefaultAutoplayTransactionDuration,
+    bool autoplay = false,
+    int autoplayDelay = kDefaultAutoplayDelayMs,
+    bool autoplayDisableOnInteraction = true,
+    int duration = kDefaultAutoplayTransactionDuration,
     ValueChanged<int>? onIndexChanged,
     required int index,
     SwiperOnTap? onTap,
-    bool loop: true,
-    Curve curve: Curves.ease,
-    Axis scrollDirection: Axis.horizontal,
+    bool loop = true,
+    Curve curve = Curves.ease,
+    Axis scrollDirection = Axis.horizontal,
     SwiperPlugin? pagination,
     SwiperPlugin? control,
     List<SwiperPlugin>? plugins,
@@ -246,11 +246,11 @@ class Swiper extends StatefulWidget {
     ScrollPhysics? physics,
     double? containerHeight,
     double? containerWidth,
-    double viewportFraction: 1.0,
+    double viewportFraction = 1.0,
     double? itemHeight,
     double? itemWidth,
-    bool outer: false,
-    double scale: 1.0,
+    bool outer = false,
+    double scale = 1.0,
   }) {
     return Swiper(
         transformer: transformer,
@@ -309,14 +309,14 @@ abstract class _SwiperTimerMixin extends State<Swiper> {
 
   void _onController() {
     switch (_controller.event) {
-      case SwiperController.START_AUTOPLAY:
+      case SwiperController.startAutoPlay:
         {
           if (_timer == null) {
             _startAutoplay();
           }
         }
         break;
-      case SwiperController.STOP_AUTOPLAY:
+      case SwiperController.stopAutoPlay:
         {
           if (_timer != null) {
             _stopAutoplay();
@@ -386,7 +386,7 @@ class _SwiperState extends _SwiperTimerMixin {
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () {
-        this.widget.onTap!(index);
+        widget.onTap!(index);
       },
       child: widget.itemBuilder!(context, index),
     );
@@ -408,7 +408,7 @@ class _SwiperState extends _SwiperTimerMixin {
   }
 
   bool _isPageViewLayout() {
-    return widget.layout == SwiperLayout.DEFAULT;
+    return widget.layout == SwiperLayout.standard;
   }
 
   @override
@@ -467,7 +467,7 @@ class _SwiperState extends _SwiperTimerMixin {
       itemBuilder = widget.itemBuilder;
     }
 
-    if (widget.layout == SwiperLayout.STACK) {
+    if (widget.layout == SwiperLayout.stack) {
       return _StackSwiper(
         loop: widget.loop,
         itemWidth: widget.itemWidth,
@@ -522,7 +522,7 @@ class _SwiperState extends _SwiperTimerMixin {
       }
 
       return child;
-    } else if (widget.layout == SwiperLayout.TINDER) {
+    } else if (widget.layout == SwiperLayout.tinder) {
       return _TinderSwiper(
         loop: widget.loop,
         itemWidth: widget.itemWidth,
@@ -536,7 +536,7 @@ class _SwiperState extends _SwiperTimerMixin {
         controller: _controller,
         scrollDirection: widget.scrollDirection,
       );
-    } else if (widget.layout == SwiperLayout.CUSTOM) {
+    } else if (widget.layout == SwiperLayout.custom) {
       return _CustomLayoutSwiper(
         loop: widget.loop,
         option: widget.customLayoutOption!,
@@ -557,18 +557,16 @@ class _SwiperState extends _SwiperTimerMixin {
   }
 
   SwiperPluginConfig? _ensureConfig(SwiperPluginConfig? config) {
-    if (config == null) {
-      config = SwiperPluginConfig(
-          outer: widget.outer,
-          itemCount: widget.itemCount,
-          layout: widget.layout,
-          indicatorLayout: widget.indicatorLayout,
-          pageController: _pageController,
-          activeIndex: _activeIndex,
-          scrollDirection: widget.scrollDirection,
-          controller: _controller,
-          loop: widget.loop);
-    }
+    config ??= SwiperPluginConfig(
+        outer: widget.outer,
+        itemCount: widget.itemCount,
+        layout: widget.layout,
+        indicatorLayout: widget.indicatorLayout,
+        pageController: _pageController,
+        activeIndex: _activeIndex,
+        scrollDirection: widget.scrollDirection,
+        controller: _controller,
+        loop: widget.loop);
     return config;
   }
 
@@ -670,7 +668,7 @@ abstract class _SubSwiper extends StatefulWidget {
       this.controller,
       this.index,
       this.itemCount,
-      this.scrollDirection: Axis.horizontal,
+      this.scrollDirection = Axis.horizontal,
       this.onIndexChanged})
       : super(key: key);
 
@@ -927,21 +925,21 @@ class ScaleAndFadeTransformer extends PageTransformer {
   final double? _scale;
   final double? _fade;
 
-  ScaleAndFadeTransformer({double? fade: 0.3, double? scale: 0.8})
+  ScaleAndFadeTransformer({double? fade = 0.3, double? scale = 0.8})
       : _fade = fade,
         _scale = scale;
 
   @override
-  Widget transform(Widget item, TransformInfo info) {
+  Widget transform(Widget child, TransformInfo info) {
     final double? position = info.position;
-    Widget child = item;
+    final Widget newChild = child;
     if (_scale != null) {
       final double scaleFactor = (1 - position!.abs()) * (1 - _scale!);
       final double scale = _scale! + scaleFactor;
 
       child = Transform.scale(
         scale: scale,
-        child: item,
+        child: newChild,
       );
     }
 

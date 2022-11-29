@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class WarmPainter extends BasePainter {
   WarmPainter(PageIndicator widget, double page, int index, Paint paint)
       : super(widget, page, index, paint);
 
+  @override
   void draw(Canvas canvas, double space, double size, double radius) {
     final double progress = page - index;
     final double distance = size + space;
@@ -87,11 +87,11 @@ class ScalePainter extends BasePainter {
 
   // 连续的两个点，含有最后一个和第一个
   @override
-  bool _shouldSkip(int? i) {
-    if (index == widget.count! - 1) {
-      return i == 0 || i == index;
+  bool _shouldSkip(int? index) {
+    if (this.index == widget.count! - 1) {
+      return index == 0 || index == this.index;
     }
-    return i == index || i == index + 1;
+    return index == this.index || index == this.index + 1;
   }
 
   @override
@@ -136,11 +136,11 @@ class ColorPainter extends BasePainter {
       : super(widget, page, index, paint);
 
   @override
-  bool _shouldSkip(int? i) {
+  bool _shouldSkip(int? index) {
     if (index == widget.count! - 1) {
-      return i == 0 || i == index;
+      return index == 0 || index == index;
     }
-    return i == index || i == index + 1;
+    return index == index || index == index! + 1;
   }
 
   @override
@@ -211,26 +211,26 @@ abstract class BasePainter extends CustomPainter {
 
 class _PageIndicatorState extends State<PageIndicator> {
   int index = 0;
-  Paint _paint = Paint();
+  final Paint _paint = Paint();
 
   BasePainter _createPainer() {
     switch (widget.layout) {
-      case PageIndicatorLayout.NONE:
+      case PageIndicatorLayout.none:
         return NonePainter(
             widget, widget.controller!.page ?? 0.0, index, _paint);
-      case PageIndicatorLayout.SLIDE:
+      case PageIndicatorLayout.slide:
         return SlidePainter(
             widget, widget.controller!.page ?? 0.0, index, _paint);
-      case PageIndicatorLayout.WARM:
+      case PageIndicatorLayout.warm:
         return WarmPainter(
             widget, widget.controller!.page ?? 0.0, index, _paint);
-      case PageIndicatorLayout.COLOR:
+      case PageIndicatorLayout.color:
         return ColorPainter(
             widget, widget.controller!.page ?? 0.0, index, _paint);
-      case PageIndicatorLayout.SCALE:
+      case PageIndicatorLayout.scale:
         return ScalePainter(
             widget, widget.controller!.page ?? 0.0, index, _paint);
-      case PageIndicatorLayout.DROP:
+      case PageIndicatorLayout.drop:
         return DropPainter(
             widget, widget.controller!.page ?? 0.0, index, _paint);
       default:
@@ -250,8 +250,8 @@ class _PageIndicatorState extends State<PageIndicator> {
       ),
     );
 
-    if (widget.layout == PageIndicatorLayout.SCALE ||
-        widget.layout == PageIndicatorLayout.COLOR) {
+    if (widget.layout == PageIndicatorLayout.scale ||
+        widget.layout == PageIndicatorLayout.color) {
       child = ClipRect(
         child: child,
       );
@@ -292,12 +292,12 @@ class _PageIndicatorState extends State<PageIndicator> {
 }
 
 enum PageIndicatorLayout {
-  NONE,
-  SLIDE,
-  WARM,
-  COLOR,
-  SCALE,
-  DROP,
+  none,
+  slide,
+  warm,
+  color,
+  scale,
+  drop,
 }
 
 class PageIndicator extends StatefulWidget {
@@ -316,7 +316,7 @@ class PageIndicator extends StatefulWidget {
   /// normal color
   final Color color;
 
-  /// layout of the dots,default is [PageIndicatorLayout.SLIDE]
+  /// layout of the dots,default is [PageIndicatorLayout.slide]
   final PageIndicatorLayout? layout;
 
   // Only valid when layout==PageIndicatorLayout.scale
@@ -331,16 +331,16 @@ class PageIndicator extends StatefulWidget {
 
   PageIndicator({
     Key? key,
-    this.size: 20.0,
-    this.space: 5.0,
+    this.size = 20.0,
+    this.space = 5.0,
     this.count,
-    this.activeSize: 20.0,
+    this.activeSize = 20.0,
     this.controller,
-    this.color: Colors.white30,
-    this.layout: PageIndicatorLayout.SLIDE,
-    this.activeColor: Colors.white,
-    this.scale: 0.6,
-    this.dropHeight: 20.0,
+    this.color = Colors.white30,
+    this.layout = PageIndicatorLayout.slide,
+    this.activeColor = Colors.white,
+    this.scale = 0.6,
+    this.dropHeight = 20.0,
   }) : super(key: key);
 
   @override

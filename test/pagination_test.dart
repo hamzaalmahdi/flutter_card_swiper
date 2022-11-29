@@ -6,7 +6,7 @@ void main() {
   testWidgets('Pagination', (WidgetTester tester) async {
     final SwiperController controller = SwiperController();
 
-    SwiperPluginConfig config = SwiperPluginConfig(
+    final SwiperPluginConfig config = SwiperPluginConfig(
         activeIndex: 0,
         controller: controller,
         itemCount: 10,
@@ -48,7 +48,7 @@ void main() {
         itemCount: 10,
         scrollDirection: Axis.vertical);
 
-    Key key = UniqueKey();
+    final Key key = UniqueKey();
     await tester.pumpWidget(MaterialApp(
       home: Scaffold(body: Builder(builder: (BuildContext context) {
         return DotSwiperPaginationBuilder(
@@ -110,7 +110,7 @@ void main() {
         itemCount: 10,
         scrollDirection: Axis.vertical);
 
-    Key key = UniqueKey();
+    final Key key = UniqueKey();
     await tester.pumpWidget(MaterialApp(
       home: Scaffold(body: Builder(builder: (BuildContext context) {
         return FractionPaginationBuilder(
