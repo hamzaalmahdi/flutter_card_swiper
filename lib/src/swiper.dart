@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_card_swipper/src/swiper_controller.dart';
-import 'package:flutter_card_swipper/src/swiper_pagination.dart';
-import 'package:flutter_card_swipper/src/swiper_plugin.dart';
-import 'package:flutter_card_swipper/widgets/flutter_page_indicator/flutter_page_indicator.dart';
+import 'package:flutter_card_swiper/src/swiper_controller.dart';
+import 'package:flutter_card_swiper/src/swiper_pagination.dart';
+import 'package:flutter_card_swiper/src/swiper_plugin.dart';
+import 'package:flutter_card_swiper/widgets/flutter_page_indicator/flutter_page_indicator.dart';
 
 import 'dart:async';
 
-import 'package:flutter_card_swipper/widgets/transformer_page_view/index_controller.dart';
-import 'package:flutter_card_swipper/widgets/transformer_page_view/transformer_page_view.dart';
+import 'package:flutter_card_swiper/widgets/transformer_page_view/index_controller.dart';
+import 'package:flutter_card_swiper/widgets/transformer_page_view/transformer_page_view.dart';
 
 part 'custom_layout.dart';
 

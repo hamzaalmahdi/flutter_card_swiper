@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:flutter_card_swipper/widgets/transformer_page_view/transformer_page_view.dart';
+import 'package:flutter_card_swiper/widgets/transformer_page_view/transformer_page_view.dart';
 
 typedef void PaintCallback(Canvas canvas, Size siz);
 

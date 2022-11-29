@@ -1,4 +1,4 @@
-library flutter_card_swipper;
+library flutter_card_swiper;
 
 export 'src/swiper.dart';
 export 'src/swiper_pagination.dart';

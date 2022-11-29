@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_card_swipper/flutter_card_swiper.dart';
-import 'package:flutter_card_swipper/widgets/flutter_page_indicator/flutter_page_indicator.dart';
+import 'package:flutter_card_swiper/flutter_card_swiper.dart';
+import 'package:flutter_card_swiper/widgets/flutter_page_indicator/flutter_page_indicator.dart';
 import 'config.dart';
 import 'forms/form_widget.dart';
 

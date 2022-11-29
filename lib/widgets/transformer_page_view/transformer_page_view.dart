@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:flutter_card_swipper/widgets/transformer_page_view/index_controller.dart';
+import 'package:flutter_card_swiper/widgets/transformer_page_view/index_controller.dart';
 
 ///
 /// NOTICE::
@@ -264,7 +264,7 @@ class TransformerPageView extends StatefulWidget {
     this.itemBuilder,
     this.pageController,
     required this.itemCount,
-  })   : assert(itemCount == 0 || itemBuilder != null || transformer != null),
+  })  : assert(itemCount == 0 || itemBuilder != null || transformer != null),
         this.duration =
             duration ?? Duration(milliseconds: kDefaultTransactionDuration),
         super(key: key);

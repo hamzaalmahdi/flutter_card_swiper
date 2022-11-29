@@ -1,5 +1,5 @@
-import 'package:flutter_card_swipper/flutter_card_swiper.dart';
-import 'package:flutter_card_swipper/widgets/transformer_page_view/index_controller.dart';
+import 'package:flutter_card_swiper/flutter_card_swiper.dart';
+import 'package:flutter_card_swiper/widgets/transformer_page_view/index_controller.dart';
 
 class SwiperController extends IndexController {
   // Autoplay is started

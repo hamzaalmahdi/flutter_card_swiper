@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_card_swipper/src/swiper_plugin.dart';
+import 'package:flutter_card_swiper/src/swiper_plugin.dart';
 
 class SwiperControl extends SwiperPlugin {
   ///IconData for previous
